@@ -1,18 +1,15 @@
-import { Outlet, Link } from "react-router-dom";
-
+import './App.css'
 export default function App() {
   return (
-    <div>
-      <h1>Codachi</h1>
-      <nav
-        style={{
-          borderBottom: "solid 1px",
-          paddingBottom: "1rem",
-        }}
-      >
-        <Link to="/about">About</Link>
-      </nav>
-      <Outlet />
+    <div className="flex-container">
+      <div className="row"> 
+          <img className="flex-item" src="logo.png" alt="Codachi" style={{ height: '100px' }} />
+      
+          </div>
+      <div className="row" > 
+          <p id="waitlist-link"><a href="https://codachi.eo.page/notifyme">Join the waitlist</a></p>
+          </div>
+
     </div>
   );
 }

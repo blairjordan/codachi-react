@@ -1,38 +1,55 @@
-.App {
-  text-align: center;
+
+
+
+@font-face {
+  font-family: 'minecraftmedium';
+  src: url('minecraft-webfont.woff2') format('woff2'),
+       url('minecraft-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: #130025;
+  font-family: 'minecraftmedium';
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#root { 
+  height: 100%;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flex-container {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.row {
+  width: auto;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.flex-item {
+  margin: 10px;
+  text-align: center;
+}
+p {
+  color: #A35FE1;
+}
+a {
+  text-decoration: none;
+  transition: color 0.3s linear;
+  -webkit-transition: color 0.3s linear;
+  -moz-transition: color 0.3s linear;
+}
+a:hover {
+  color: #A35FE1;
 }

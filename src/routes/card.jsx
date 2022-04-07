@@ -23,7 +23,7 @@ export default function Card() {
         setState({ ...state, errors: [error] })
       }
     })()
-  }, [])
+  }, [state, type, name, level])
 
   return (
     <main style={{ padding: "1rem 0" }}>

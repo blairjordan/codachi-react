@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom"
 
 import { CodachiCardAPI } from "../api"
 
-const baseUrl = "http://api.codachi.monster"
+const baseUrl = "https://api.codachi.monster"
 
 const api = CodachiCardAPI({ baseUrl })
 

@@ -1,34 +1,81 @@
+import * as React from "react"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 
 import { CodachiCardAPI } from "../api"
 
-const api = CodachiCardAPI({ baseUrl: "localhost:8080" })
+const baseUrl = "http://api.codachi.monster"
+
+const api = CodachiCardAPI({ baseUrl })
 
 export default function Card() {
-  const { type, name, level } = useParams()
-  const [state, setState] = useState({ errors: [] })
+  const location = useLocation()
+  const [errors, setErrors] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [cardSerial, setCardSerial] = useState("")
+  const [params, setParams] = useState({ type: undefined, name: undefined, level: undefined})
 
   useEffect(() => {
-    ;(async () => {
-      try {
-        const cardResponse = await api.generateCard({
-          type,
-          name,
-          level,
-        })
+    if (!isLoading && !errors.length && !cardSerial) {
+      ;(async () => {
+        try {
+          setIsLoading(true)
 
-        console.log(cardResponse)
-      } catch (error) {
-        setState({ ...state, errors: [error] })
-      }
-    })()
-  }, [state, type, name, level])
+          const locationParams = location.search
+            .substring(1)
+            .split("&")
+            .map((item) => item.split("="))
+            .reduce((prev, curr) => {
+              return {
+                ...prev,
+                [curr[0]]: curr[1],
+              }
+            }, {})
+
+          setParams(locationParams)
+          const { type, name, level } = locationParams
+          const cardResponse = await api.generateCard({
+            type,
+            name,
+            level: Number.parseInt(level),
+          })
+
+          setCardSerial(cardResponse.body.serial)
+        } catch (error) {
+          console.error(error)
+          setErrors([error])
+        } finally {
+          setIsLoading(false)
+        }
+      })()
+    }
+  }, [cardSerial, errors, isLoading, location])
 
   return (
-    <main style={{ padding: "1rem 0" }}>
-      <p>{state.errors}</p>
-      <h2>Card</h2>
-    </main>
+    <>
+      {cardSerial && (
+        <>
+          <div className="flex-container">
+            <div className="row">
+              <img
+                className="flex-item"
+                src={`${baseUrl}/cards/card-${cardSerial}.png`}
+                alt="Codachi card"
+              />
+            </div>
+
+            <a
+              className="twitter-share-button"
+              href={`https://twitter.com/intent/tweet?text=I+coded+my+Codachi+monster%3A+${params.name}+to+level+${params.level}.+Checkout+the+Codachi+VS+Code+plugin+%40+https%3A%2F%2Fcodachi.monster+%F0%9F%91%BE+%23codachi+%23techtwitter`}
+              data-size="large"
+              target="_blank"
+              rel="noreferrer"
+            >
+              🐦 Tweet this
+            </a>
+          </div>
+        </>
+      )}
+    </>
   )
 }

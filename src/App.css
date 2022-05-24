@@ -6,7 +6,6 @@
   font-style: normal;
 
 }
-
 html, body {
   height: 100%;
 }
@@ -15,7 +14,6 @@ body {
   background: #130025;
   font-family: 'minecraftmedium';
 }
-
 #root { 
   height: 100%;
 }
@@ -42,11 +40,16 @@ p {
   color: #A35FE1;
 }
 a {
+  color: #A35FE1;
   text-decoration: none;
   transition: color 0.3s linear;
   -webkit-transition: color 0.3s linear;
   -moz-transition: color 0.3s linear;
 }
 a:hover {
+  color: #cfa9f3;
+}
+a:visited {
   color: #A35FE1;
+  text-decoration: none;
 }

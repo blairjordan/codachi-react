@@ -11,8 +11,8 @@ export default function App() {
         />
       </div>
       <div className="row">
-        <p id="waitlist-link">
-          <a href="https://codachi.eo.page/notifyme">Join the waitlist</a>
+        <p id="download-link">
+          <a href="https://marketplace.visualstudio.com/items?itemName=Pegleg.codachi">Download Extension</a>
         </p>
       </div>
     </div>
